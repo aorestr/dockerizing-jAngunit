@@ -1,5 +1,8 @@
 # base image
 FROM node:12.18.0
+EXPOSE 4270
+
+LABEL author="Ángel Oreste" 
 
 # set working directory
 WORKDIR /app
@@ -8,13 +11,12 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 
 # copy the jAngunit repo to workplace
-RUN sh -c 'apt-get update; apt-get install -y git; \
-    git clone git@github.com:aorestr/jAngunit.git'
+RUN git clone https://github.com/aorestr/jAngunit.git
+WORKDIR /app/jAngunit
 
 # install all the needed packages for Angular
-RUN sh -c 'curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - sudo apt-get install -y nodejs \
-    npm install npm@latest -g \
-    npm install'
+RUN npm install -g npm@6.14.5
+RUN npm install
 
 # start app
 CMD npm start
