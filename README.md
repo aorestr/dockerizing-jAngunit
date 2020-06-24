@@ -7,9 +7,10 @@ I followed [this official guide](https://docs.docker.com/engine/install/ubuntu/#
 ## Run the app
 Once you are located on the repo folder, build the Docker image:
 ```
-docker build -t angular-app:dev .
+docker build -t angular-app:dev -f dev.Dockerfile .
 ```
 And then run a container based on it:
 ```
 docker run --rm -ti -p 4270:4270--name angular-container angular-app:dev
 ```
+You can access to the app just by typing "http://localhost:4270/" on your favourite browser.
