@@ -4,15 +4,14 @@
 # base image
 FROM node:12.18.0 as builder
 
-# set working directory
-WORKDIR /app
-
 # copy the jAngunit repo to workplace
-RUN git clone https://github.com/aorestr/jAngunit.git
+RUN git clone https://github.com/aorestr/jAngunit.git /app/jAngunit
+
+# set working directory
 WORKDIR /app/jAngunit
 
 # install all the needed packages for Angular
-RUN npm install
+RUN npm ci
 RUN npm install -g @angular/cli@8
 
 # generate build
