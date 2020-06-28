@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: jangunit-svc
+  labels:
+    app: jangunit
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    protocol: "TCP"
+  selector:
+    app: jangunit
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jangunit-deployment
+  labels:
+    app: jangunit
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jangunit
+  template:
+    metadata:
+      labels:
+        app: jangunit
+    spec:
+      containers:
+      - name: jangunit
+        image: jangunit-app:prod
+        ports:
+        - containerPort: 4270
