@@ -1,10 +1,8 @@
-#############
-### build ###
-#############
-
+###############
+### Builder ###
+###############
 # base image
 FROM node:12.18.0 as builder
-LABEL author="Ángel Oreste" 
 
 # set working directory
 WORKDIR /app
@@ -20,11 +18,12 @@ RUN npm install -g @angular/cli@8
 # generate build
 RUN ng build --output-path=/app/dist
 
-############
-### prod ###
-############
+####################
+### Nginx server ###
+####################
 # base image
 FROM nginx:1.18.0-alpine
+LABEL author="Ángel Oreste" 
 
 # copy artifact build from the 'build environment'
 COPY --from=builder /app/dist /usr/share/nginx/html

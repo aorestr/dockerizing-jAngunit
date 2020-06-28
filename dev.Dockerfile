@@ -1,14 +1,16 @@
+###################
+### Angular app ###
+###################
 # base image
 FROM node:12.18.0
+LABEL author="Ángel Oreste"
 EXPOSE 4270
 
-LABEL author="Ángel Oreste" 
+# clone repo with the app
+WORKDIR /app
+RUN git clone https://github.com/aorestr/jAngunit
 
 # set working directory
-WORKDIR /app
-
-# copy the jAngunit repo to workplace
-RUN git clone https://github.com/aorestr/jAngunit.git
 WORKDIR /app/jAngunit
 
 # install all the needed packages for Angular
